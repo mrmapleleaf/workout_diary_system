@@ -14,11 +14,11 @@ import javax.persistence.Table;
 @Table(name = "trainees")
 @NamedQueries({
     @NamedQuery(
-                name = "getAllTrainee",
+                name = "getAllTrainees",
                 query = "SELECT t FROM Trainee AS t ORDER BY t.id DESC"
             ),
     @NamedQuery(
-                name = "getAllTraineeCount",
+                name = "getAllTraineesCount",
                 query = "SELECT COUNT(t) FROM Trainee AS t"
             ),
     @NamedQuery(
