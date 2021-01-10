@@ -54,6 +54,11 @@ public class TraineeIndexServlet extends HttpServlet {
         request.setAttribute("trainees_count", trainees_count);
         request.setAttribute("page", page);
 
+        if(request.getSession().getAttribute("flush") != null) {
+            request.setAttribute("flush", request.getSession().getAttribute("flush"));
+            request.getSession().removeAttribute("flush");
+        }
+
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/trainees/index.jsp");
         rd.forward(request, response);
