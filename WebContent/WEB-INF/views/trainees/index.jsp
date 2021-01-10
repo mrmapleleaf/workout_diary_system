@@ -16,7 +16,7 @@
                 </tr>
                 <c:forEach var="trainee" items="${trainees}" varStatus="status">
                     <tr class="row${status.count % 2 }">
-                        <td><c:out value="${trainee.username }" /></td>
+                        <td><a href="<c:url value='/trainees/show?id=${trainee.id}' />"><c:out value="${trainee.username }" /></a></td>
                     </tr>
                 </c:forEach>
             </tbody>
