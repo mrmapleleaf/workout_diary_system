@@ -9,10 +9,10 @@ import models.Trainee;
 import utils.DBUtil;
 
 public class TraineeValidator {
-    public static List<String>  validate(Trainee t, Boolean usernameDupulicateCheckFlag, Boolean passwordCheckFlag) {
+    public static List<String>  validate(Trainee t, Boolean usernameDuplicateCheckFlag, Boolean passwordCheckFlag) {
         List<String> errors = new ArrayList<>();
 
-        String username_error = validateUsername(t.getUsername(), usernameDupulicateCheckFlag);
+        String username_error = validateUsername(t.getUsername(), usernameDuplicateCheckFlag);
         if(!username_error.equals("")) {
             errors.add(username_error);
         }
@@ -26,12 +26,12 @@ public class TraineeValidator {
 
     }
 
-    private static String validateUsername(String username, Boolean usernameDupulicateCheckFlag) {
+    private static String validateUsername(String username, Boolean usernameDuplicateCheckFlag) {
         if(username == null || username.equals("")) {
             return "ユーザー名を入力してください";
         }
 
-        if(usernameDupulicateCheckFlag) {
+        if(usernameDuplicateCheckFlag) {
             EntityManager em = DBUtil.createEntityManager();
             long trainees_count = (long)em.createNamedQuery("checkUsername", Long.class)
                                           .setParameter("username", username)

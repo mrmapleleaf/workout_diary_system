@@ -19,6 +19,8 @@
                         </tr>
                     </tbody>
                 </table>
+
+                <p><a href="<c:url value='/trainees/edit?id=${trainee.id}' />">トレーニー情報を編集</a></p>
             </c:when>
 
          <c:otherwise>
