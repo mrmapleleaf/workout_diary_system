@@ -45,7 +45,7 @@ public class TraineeIndexServlet extends HttpServlet {
                                     .setMaxResults(15)
                                     .getResultList();
 
-        long trainees_count = em.createNamedQuery("getAllTraineesCount", Long.class)
+        long trainees_count = (long)em.createNamedQuery("getAllTraineesCount", Long.class)
                                 .getSingleResult();
 
         em.close();

@@ -15,6 +15,6 @@
             <c:import url="_form.jsp" />
         </form>
 
-        <p>トップページへ戻る</p>
+        <p><a href="<c:url value='/login' />">ログイン画面へ</a></p>
     </c:param>
 </c:import>

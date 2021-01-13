@@ -11,7 +11,19 @@
     <body>
         <div id="wrapper">
             <div id="header">
-                <h1>筋トレポート</h1>
+                <div id="header_menu">
+                    <h1>筋トレポート</h1>&nbsp;&nbsp;&nbsp;
+                    <c:if test="${sessionScope.login_trainee != null}" >
+                        <a href="<c:url value='/trainees/index' />">トレーニー一覧</a>&nbsp;
+                        <a href="<c:url value='/reports/index' />">レポート一覧</a>&nbsp;
+                    </c:if>
+                </div>
+                <div id="trainee_name">
+                    <c:if test="${sessionScope.login_trainee != null}" >
+                        <c:out value="${sessionScope.login_trainee.username }" />さん
+                        <a href="<c:url value='/logout' />">ログアウト</a>
+                    </c:if>
+                </div>
             </div>
             <div id="content">
                 ${param.content}
