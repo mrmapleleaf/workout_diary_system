@@ -28,8 +28,8 @@
     <input type="text" name="menu" value="${workoutreport.menu}" />
     <br /><br />
 
-    <label for="rep">レップ数</label><br />
-    <input type="text" name="rep" value="${workoutreport.rep}" />
+    <label for="reps">レップ数</label><br />
+    <input type="text" name="reps" value="${workoutreport.rep}" />
     <br /><br />
 
     <label for="sets">セット数</label><br />

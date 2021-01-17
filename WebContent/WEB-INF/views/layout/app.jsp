@@ -16,6 +16,7 @@
                     <c:if test="${sessionScope.login_trainee != null}" >
                         <a href="<c:url value='/trainees/index' />">トレーニー一覧</a>&nbsp;
                         <a href="<c:url value='/workoutreports/index' />">レポート一覧</a>&nbsp;
+                        <a href="<c:url value='/workoutreports/new' />">レポート投稿</a>
                     </c:if>
                 </div>
                 <div id="trainee_name">
