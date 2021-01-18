@@ -54,7 +54,7 @@ public class WorkoutReportIndexServlet extends HttpServlet {
         request.setAttribute("workoutreports", workoutreports);
         request.setAttribute("workoutreports_count", workoutreports_count);
         request.setAttribute("page", page);
-        if(request.getSession().getAttribute("_flush") != null) {
+        if(request.getSession().getAttribute("flush") != null) {
             request.setAttribute("flush", request.getSession().getAttribute("flush"));
             request.getSession().removeAttribute("flush");
         }

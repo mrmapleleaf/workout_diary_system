@@ -13,22 +13,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Trainee;
 import models.WorkoutReport;
 import models.validators.WorkoutReportValidator;
 import utils.DBUtil;
 
 /**
- * Servlet implementation class WorkoutReportCreateServlet
+ * Servlet implementation class WorkoutReportUpdateServlet
  */
-@WebServlet("/workoutreports/create")
-public class WorkoutReportCreateServlet extends HttpServlet {
+@WebServlet("/workoutreports/update")
+public class WorkoutReportUpdateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public WorkoutReportCreateServlet() {
+    public WorkoutReportUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,21 +36,14 @@ public class WorkoutReportCreateServlet extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String _token = request.getParameter("_token");
+        String _token = (String)request.getParameter("_token");
+
         if(_token != null && _token.equals(request.getSession().getId())) {
             EntityManager em = DBUtil.createEntityManager();
 
-            WorkoutReport wr = new WorkoutReport();
+            WorkoutReport wr = em.find(WorkoutReport.class , (Integer)(request.getSession().getAttribute("workoutreport_id")));
 
-            wr.setTrainee((Trainee)request.getSession().getAttribute("login_trainee"));
-
-            Date report_date = new Date(System.currentTimeMillis());
-            String rd_str = request.getParameter("report_date");
-            if(rd_str != null && !rd_str.equals("")) {
-                report_date = Date.valueOf(request.getParameter("report_date"));
-            }
-            wr.setReport_date(report_date);
-
+            wr.setReport_date(Date.valueOf(request.getParameter("report_date")));
             wr.setBody_part(request.getParameter("body_part"));
             wr.setMenu(request.getParameter("menu"));
             wr.setRep(Integer.parseInt(request.getParameter("rep")));
@@ -60,29 +52,28 @@ public class WorkoutReportCreateServlet extends HttpServlet {
             wr.setReview(request.getParameter("review"));
 
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-            wr.setCreated_at(currentTime);
             wr.setUpdated_at(currentTime);
 
             List<String> errors = WorkoutReportValidator.validate(wr);
             if(errors.size() > 0) {
                 em.close();
 
-                request.setAttribute("_token", request.getSession().getId());
                 request.setAttribute("errors", errors);
                 request.setAttribute("workoutreport", wr);
+                request.setAttribute("_token", request.getSession().getId());
 
-                RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/workoutreports/new.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/workoutreports/edit.jsp");
                 rd.forward(request, response);
             } else {
                 em.getTransaction().begin();
-                em.persist(wr);
                 em.getTransaction().commit();
                 em.close();
 
-                request.getSession().setAttribute("flush", "投稿完了");
+                request.getSession().setAttribute("flush", "更新完了");
+                request.getSession().removeAttribute("workoutreport_id");
                 response.sendRedirect(request.getContextPath() + "/workoutreports/index");
             }
-
         }
     }
+
 }
