@@ -21,7 +21,7 @@
                     <td class="report_name"><c:out value='${workoutreport.trainee.username}' /></td>
                     <td class="report_date"><fmt:formatDate value='${workoutreport.report_date }' pattern='yyyy-MM-dd'/></td>
                     <td class="report_body_part">${workoutreport.body_part}</td>
-                    <td class="report_action"><a href="<c:url value='/workoutreports/index' />">詳細を見る</a></td>
+                    <td class="report_action"><a href="<c:url value='/workoutreports/show?id=${workoutreport.id }' />">詳細を見る</a></td>
                 </tr>
             </c:forEach>
         </table>
