@@ -2,7 +2,7 @@
 
 body {
     color: #333333;
-    font-family: "Hiragino Kaku Gothic Pro",Meiryo,"MS PGothic",Helvetica,Arial,sans-serif;
+    font-family: "Avenir Next";
 }
 
 #header {
@@ -16,6 +16,7 @@ body {
     width: 94%;
     margin-top: 15px;
     padding-left: 3%;
+    height: 800px;
 }
 
 h1 {
@@ -68,7 +69,14 @@ button {
 }
 
 #footer {
+    background-color: #FF9966;
+    height: 100px;
+}
+
+.footer_text1 {
     text-align: center;
+    padding-top: 40px;
+    color: white;
 }
 
 table#employee_list th {
@@ -166,4 +174,32 @@ table#report_list .report_action {
 
 pre {
     font-family: "Hiragino Kaku Gothic Pro",Meiryo,"MS PGothic",Helvetica,Arial,sans-serif;
+}
+
+h3 {
+    font-size: larger;
+}
+
+table#post_num th {
+    width: 26%;
+    padding: 10px 2%;
+}
+
+table#post_num td {
+    width: 29%;
+    padding: 10px 2%;
+}
+#login_form {
+    text-align: center;
+}
+
+.create_account_link{
+    border-top: 2px dotted gray;
+    margin-top: 50px;
+    padding-top: 20px;
+    display: inline-block;
+}
+
+.create_account {
+    text-align: center;
 }

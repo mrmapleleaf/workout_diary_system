@@ -13,20 +13,23 @@
             </div>
         </c:if>
 
-        <h2>筋トレポートにログイン</h2>
-        <form method="POST" action="<c:url value='/login' />">
-            <label for="username">ユーザー名</label><br />
-            <input type="text" name="username" value="${username }" />
-            <br /><br />
 
-            <label for="password">パスワード</label><br />
-            <input type="password" name="password" />
-            <br /><br />
+        <div id="login_form">
+            <h2 class="login_title">筋トレポートにログイン</h2>
+            <form method="POST" action="<c:url value='/login' />">
+                <label for="username">ユーザー名</label><br />
+                <input type="text" name="username" value="${username }" />
+                <br /><br />
 
-            <input type="hidden" name="_token" value="${_token}" />
-            <button type="submit">ログイン</button>
-        </form>
+                <label for="password">パスワード</label><br />
+                <input type="password" name="password" />
+                <br /><br />
 
-        <p>アカウントをお持ちで無い方は<a href="<c:url value='/trainees/new'/>">こちら</a></p>
+                <input type="hidden" name="_token" value="${_token}" />
+                <button type="submit">ログイン</button>
+            </form>
+
+            <div class="create_account_link">アカウントをお持ちで無い方は<a href="<c:url value='/trainees/new'/>">こちら</a></div>
+        </div>
     </c:param>
 </c:import>

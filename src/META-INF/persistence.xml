@@ -4,6 +4,7 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>models.Trainee</class>
         <class>models.WorkoutReport</class>
+        <class>models.Likes</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/workout_diary_system?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf8"/>

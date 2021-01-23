@@ -19,8 +19,9 @@
                         </tr>
                     </tbody>
                 </table>
-
+                <c:if test="${sessionScope.login_trainee.id == trainee.id }" >
                 <p><a href="<c:url value='/trainees/edit?id=${trainee.id}' />">トレーニー情報を編集</a></p>
+                </c:if>
             </c:when>
 
          <c:otherwise>

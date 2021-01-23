@@ -21,7 +21,7 @@
                 </div>
                 <div id="trainee_name">
                     <c:if test="${sessionScope.login_trainee != null}" >
-                        <a><c:out value="${sessionScope.login_trainee.username }" /></a>&nbsp;さん
+                        <a href="<c:url value='/mypage' />"><c:out value="${sessionScope.login_trainee.username }" /></a>&nbsp;さん
                         <a href="<c:url value='/logout' />">ログアウト</a>
                     </c:if>
                 </div>
@@ -30,7 +30,9 @@
                 ${param.content}
             </div>
             <div id="footer">
-                Prod by Mr.Mapleleaf
+                <div class="footer_text1">
+                    Prod by Mr.Mapleleaf
+                </div>
             </div>
         </div>
     </body>

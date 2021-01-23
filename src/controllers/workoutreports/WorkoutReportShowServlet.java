@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import models.Trainee;
 import models.WorkoutReport;
 import utils.DBUtil;
 
@@ -35,10 +36,22 @@ public class WorkoutReportShowServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         WorkoutReport wr = em.find(WorkoutReport.class, Integer.parseInt(request.getParameter("id")));
+        Trainee login_trainee = (Trainee)request.getSession().getAttribute("login_trainee");
+
+        long checkLikedAlready = (long)em.createNamedQuery("checkLikedAlready", Long.class)
+                                   .setParameter("trainee", login_trainee)
+                                   .setParameter("workoutreport", wr)
+                                   .getSingleResult();
+
+        long likesCount = (long)em.createNamedQuery("getAllLikesCount", Long.class)
+                                  .setParameter("workoutreport", wr)
+                                  .getSingleResult();
 
         em.close();
 
         request.setAttribute("workoutreport", wr);
+        request.setAttribute("checkLikedAlready", checkLikedAlready);
+        request.setAttribute("likesCount", likesCount);
         request.setAttribute("_token", request.getSession().getId());
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/workoutreports/show.jsp");

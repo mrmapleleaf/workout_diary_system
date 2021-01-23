@@ -49,11 +49,18 @@
                             <th>更新日時</th>
                             <td><fmt:formatDate value="${workoutreport.updated_at}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                         </tr>
+                        <tr>
+                            <th>いいね数</th>
+                            <td><c:out value="${likesCount}"/></td>
+                        </tr>
                     </tbody>
                 </table>
 
                 <c:if test="${sessionScope.login_trainee.id == workoutreport.trainee.id }" >
                     <p><a href="<c:url value='/workoutreports/edit?id=${workoutreport.id}' />">このレポートを編集</a><p>
+                </c:if>
+                <c:if test="${sessionScope.login_trainee.id != workoutreport.trainee.id && checkLikedAlready == 0}">
+                    <p><a href="<c:url value='/likes/create?id=${workoutreport.id}' />">いいね！</a></p>
                 </c:if>
             </c:when>
 

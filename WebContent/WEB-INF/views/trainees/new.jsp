@@ -10,11 +10,13 @@
             </c:forEach>
             </div>
         </c:if>
-        <h2>筋トレポートへようこそ！</h2>
-        <form method="POST" action="<c:url value='/trainees/create' />">
-            <c:import url="_form.jsp" />
-        </form>
+        <div class="create_account">
+            <h2>筋トレポートへようこそ！</h2>
+            <form method="POST" action="<c:url value='/trainees/create' />">
+                <c:import url="_form.jsp" />
+            </form>
 
-        <p><a href="<c:url value='/login' />">ログイン画面へ</a></p>
+            <p><a href="<c:url value='/login' />">ログイン画面へ</a></p>
+        </div>
     </c:param>
 </c:import>
