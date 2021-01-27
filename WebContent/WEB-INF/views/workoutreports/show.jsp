@@ -51,7 +51,14 @@
                         </tr>
                         <tr>
                             <th>いいね数</th>
-                            <td><c:out value="${likesCount}"/></td>
+                            <c:choose>
+                                <c:when test="${likesCount > 0}">
+                                    <td><a href="<c:url value='/likes/index?id=${workoutreport.id}'/>"><c:out value="${likesCount}"/></a></td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td><c:out value="${likesCount}"/></td>
+                                </c:otherwise>
+                            </c:choose>
                         </tr>
                     </tbody>
                 </table>

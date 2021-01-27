@@ -1,4 +1,4 @@
-package controllers.workoutreports;
+package controllers.likes;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,20 +11,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import models.Likes;
 import models.WorkoutReport;
 import utils.DBUtil;
 
 /**
- * Servlet implementation class WorkoutReportIndexServlet
+ * Servlet implementation class LikesIndexServlet
  */
-@WebServlet("/workoutreports/index")
-public class WorkoutReportIndexServlet extends HttpServlet {
+@WebServlet("/likes/index")
+public class LikesIndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public WorkoutReportIndexServlet() {
+    public LikesIndexServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,33 +36,33 @@ public class WorkoutReportIndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
+        WorkoutReport wr = em.find(WorkoutReport.class, Integer.parseInt(request.getParameter("id")));
+
         int page;
         try {
             page = Integer.parseInt(request.getParameter("page"));
         } catch(Exception e) {
             page = 1;
         }
-        List<WorkoutReport> workoutreports = em.createNamedQuery("getAllReports", WorkoutReport.class)
-                                 .setFirstResult(15 * (page - 1))
-                                 .setMaxResults(15)
-                                 .getResultList();
 
-        long workoutreports_count = (long)em.createNamedQuery("getAllReportsCount", Long.class)
-                                      .getSingleResult();
+        List<Likes> getAllLikes = em.createNamedQuery("getAllLikes", Likes.class)
+                                    .setParameter("workoutreport", wr)
+                                    .setFirstResult(15 * (page - 1))
+                                    .setMaxResults(15)
+                                    .getResultList();
 
-
+        long getAllLikesCount = (long)em.createNamedQuery("getAllLikesCount", Long.class)
+                                  .setParameter("workoutreport", wr)
+                                  .getSingleResult();
 
         em.close();
 
-        request.setAttribute("workoutreports", workoutreports);
-        request.setAttribute("workoutreports_count", workoutreports_count);
         request.setAttribute("page", page);
-        if(request.getSession().getAttribute("flush") != null) {
-            request.setAttribute("flush", request.getSession().getAttribute("flush"));
-            request.getSession().removeAttribute("flush");
-        }
+        request.setAttribute("wr", wr);
+        request.setAttribute("getAllLikes", getAllLikes);
+        request.setAttribute("getAllLikesCount", getAllLikesCount);
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/workoutreports/index.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/likes/index.jsp");
         rd.forward(request, response);
     }
 

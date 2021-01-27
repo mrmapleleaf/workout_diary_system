@@ -17,7 +17,7 @@ import javax.persistence.Table;
     @NamedQueries ({
         @NamedQuery(
                 name = "getAllLikes",
-                query = "SELECT l FROM Likes AS l WHERE l.workoutreport = :workoutreport ORDER BY l.id"
+                query = "SELECT l FROM Likes AS l WHERE l.workoutreport = :workoutreport ORDER BY l.id DESC"
                 ),
         @NamedQuery(
                 name = "getAllLikesCount",

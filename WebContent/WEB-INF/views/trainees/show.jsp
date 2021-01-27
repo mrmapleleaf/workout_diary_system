@@ -3,6 +3,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
+        <c:if test="${flush != null}" >
+        <div id="flush_success">
+            <c:out value="${flush}" />
+        </div>
+    </c:if>
         <c:choose>
             <c:when test="${trainee != null }">
                 <h2>トレーニー詳細</h2>
@@ -28,7 +33,9 @@
             <h2>お探しのデータは見つかりませんでした。</h2>
          </c:otherwise>
         </c:choose>
-
+        <c:if test="${checkFollowedAlready == 0}">
+            <p><a href="<c:url value='/follows/create?id=${trainee.id}'/>">フォロー</a></p>
+        </c:if>
         <p><a href="<c:url value='/trainees/index' />">トレーニー一覧に戻る</a></p>
 
     </c:param>

@@ -16,7 +16,7 @@ body {
     width: 94%;
     margin-top: 15px;
     padding-left: 3%;
-    height: 800px;
+    margin-bottom: 30px;
 }
 
 h1 {
@@ -71,6 +71,7 @@ button {
 #footer {
     background-color: #FF9966;
     height: 100px;
+
 }
 
 .footer_text1 {

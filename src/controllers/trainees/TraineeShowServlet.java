@@ -35,10 +35,23 @@ public class TraineeShowServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         Trainee t = em.find(Trainee.class, Integer.parseInt(request.getParameter("id")));
+        Trainee trainee1 = (Trainee) request.getSession().getAttribute("login_trainee");
+
+
+        long checkFollowedAlready = em.createNamedQuery("checkFollowedAlready", Long.class)
+                                      .setParameter("trainee1", trainee1)
+                                      .setParameter("trainee2", t)
+                                      .getSingleResult();
 
         em.close();
 
+        if(request.getSession().getAttribute("flush") != null) {
+            request.setAttribute("flush", request.getSession().getAttribute("flush"));
+            request.getSession().removeAttribute("flush");
+        }
+
         request.setAttribute("trainee", t);
+        request.setAttribute("checkFollowedAlready", checkFollowedAlready);
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/trainees/show.jsp");
         rd.forward(request, response);
     }
