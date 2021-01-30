@@ -15,8 +15,10 @@
                     <h1>筋トレポート</h1>&nbsp;&nbsp;&nbsp;
                     <c:if test="${sessionScope.login_trainee != null}" >
                         <a href="<c:url value='/trainees/index' />">トレーニー一覧</a>&nbsp;
-                        <a href="<c:url value='/workoutreports/index' />">タイムライン</a>&nbsp;
-                        <a href="<c:url value='/workoutreports/new' />">レポート投稿</a>
+                        <a href="<c:url value='/workoutreports/index' />">レポート一覧</a>&nbsp;
+                        <a href="<c:url value='/timeline' />">タイムライン</a>
+                        <a href="<c:url value='/workoutreports/new' />">投稿する</a>
+
                     </c:if>
                 </div>
                 <div id="trainee_name">

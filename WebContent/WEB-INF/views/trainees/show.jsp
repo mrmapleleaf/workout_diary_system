@@ -33,7 +33,7 @@
             <h2>お探しのデータは見つかりませんでした。</h2>
          </c:otherwise>
         </c:choose>
-        <c:if test="${checkFollowedAlready == 0}">
+        <c:if test="${checkFollowedAlready == 0 and sessionScope.login_trainee.id != trainee.id}">
             <p><a href="<c:url value='/follows/create?id=${trainee.id}'/>">フォロー</a></p>
         </c:if>
         <p><a href="<c:url value='/trainees/index' />">トレーニー一覧に戻る</a></p>

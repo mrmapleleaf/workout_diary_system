@@ -12,6 +12,7 @@
                         <tr>
                             <th>ユーザー名</th>
                             <td><c:out value="${workoutreport.trainee.username}" /></td>
+
                         </tr>
                         <tr>
                             <th>日付</th>

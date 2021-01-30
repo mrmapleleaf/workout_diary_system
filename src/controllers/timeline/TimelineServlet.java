@@ -1,4 +1,4 @@
-package controllers.mypage;
+package controllers.timeline;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,16 +16,16 @@ import models.WorkoutReport;
 import utils.DBUtil;
 
 /**
- * Servlet implementation class MypqgeServlet
+ * Servlet implementation class TimelineServlet
  */
-@WebServlet("/mypage")
-public class MypqgeServlet extends HttpServlet {
+@WebServlet("/timeline")
+public class TimelineServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MypqgeServlet() {
+    public TimelineServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,43 +41,32 @@ public class MypqgeServlet extends HttpServlet {
         int page;
         try {
             page = Integer.parseInt(request.getParameter("page"));
-        } catch(Exception e){
+        } catch(Exception e) {
             page = 1;
         }
 
-        List<WorkoutReport> myWorkoutReports = em.createNamedQuery("getMyAllReports", WorkoutReport.class)
-                                                 .setParameter("trainee", login_trainee)
+        List<WorkoutReport> followReportList = em.createNamedQuery("getAllFollowReports", WorkoutReport.class)
+                                                 .setParameter("trainee1", login_trainee)
                                                  .setFirstResult(15 * (page - 1))
                                                  .setMaxResults(15)
                                                  .getResultList();
 
-        long myWorkoutReportsCount = (long) em.createNamedQuery("getMyAllReportsCount", Long.class)
-                                              .setParameter("trainee", login_trainee)
-                                              .getSingleResult();
-
-        long myAllFollowCount = (long)em.createNamedQuery("getAllFollowCount", Long.class)
-                               .setParameter("trainee1", login_trainee)
-                               .getSingleResult();
-
-        long myAllFollowerCount = (long)em.createNamedQuery("getAllFollowedCount", Long.class)
-                                          .setParameter("trainee2", login_trainee)
-                                          .getSingleResult();
+        long followReportListCount = (long)em.createNamedQuery("getAllFollowReportsCount", Long.class)
+                                            .setParameter("trainee1", login_trainee)
+                                            .getSingleResult();
 
         em.close();
 
-        request.setAttribute("page", page);
-        request.setAttribute("myWorkoutReports", myWorkoutReports);
-        request.setAttribute("myWorkoutReportsCount", myWorkoutReportsCount);
-        request.setAttribute("myAllFollowCount", myAllFollowCount);
-        request.setAttribute("myAllFollowerCount", myAllFollowerCount);
-
+        request.setAttribute("page",page);
+        request.setAttribute("followReportList", followReportList);
+        request.setAttribute("followReportListCount", followReportListCount);
 
         if(request.getSession().getAttribute("flush") != null) {
             request.setAttribute("flush", request.getSession().getAttribute("flush"));
             request.getSession().removeAttribute("flush");
         }
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/mypage/mypage.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/timeline/timeline.jsp");
         rd.forward(request, response);
 
     }

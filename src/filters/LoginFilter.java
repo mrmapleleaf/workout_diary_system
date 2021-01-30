@@ -42,13 +42,13 @@ public class LoginFilter implements Filter {
         String context_path = ((HttpServletRequest)request).getContextPath();
         String servlet_path = ((HttpServletRequest)request).getServletPath();
 
-        if(!(servlet_path.matches("/css.*") || servlet_path.matches("/trainees/new") || servlet_path.matches("/trainees/create"))) {
+        if(!(servlet_path.matches("/css.*") || servlet_path.matches("/trainees/new") || servlet_path.matches("/trainees/create") || servlet_path.matches("/index.html"))) {
             HttpSession session = ((HttpServletRequest)request).getSession();
             Trainee t = (Trainee)session.getAttribute("login_trainee");
 
             if(!servlet_path.equals("/login")) {
                 if(t == null) {
-                    ((HttpServletResponse)response).sendRedirect(context_path + "/login");
+                    ((HttpServletResponse)response).sendRedirect(context_path + "/");
                     return;
                 }
             } else {

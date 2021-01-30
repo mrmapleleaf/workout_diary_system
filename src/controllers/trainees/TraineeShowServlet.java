@@ -38,7 +38,7 @@ public class TraineeShowServlet extends HttpServlet {
         Trainee trainee1 = (Trainee) request.getSession().getAttribute("login_trainee");
 
 
-        long checkFollowedAlready = em.createNamedQuery("checkFollowedAlready", Long.class)
+        long checkFollowedAlready = (long)em.createNamedQuery("checkFollowedAlready", Long.class)
                                       .setParameter("trainee1", trainee1)
                                       .setParameter("trainee2", t)
                                       .getSingleResult();

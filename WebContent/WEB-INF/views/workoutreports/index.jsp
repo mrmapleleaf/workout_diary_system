@@ -8,7 +8,7 @@
                 <c:out value="${flush}" />
             </div>
         </c:if>
-        <h2>タイムライン</h2>
+        <h2>レポート一覧</h2>
         <table id="report_list">
             <tr>
                 <th>ユーザー名</th>
@@ -18,7 +18,14 @@
             </tr>
             <c:forEach var="workoutreport" items="${workoutreports}" varStatus="status">
                 <tr class="row${status.count % 2}">
-                    <td class="report_name"><c:out value='${workoutreport.trainee.username}' /></td>
+                    <c:choose>
+                        <c:when test="${workoutreport.trainee.id == sessionScope.login_trainee.id}">
+                        <td class="report_name"><a href="<c:url value='/mypage'/>"><c:out value='${workoutreport.trainee.username}' /></a></td>
+                        </c:when>
+                        <c:otherwise>
+                        <td class="report_name"><a href="<c:url value='/trainees/show?id=${workoutreport.trainee.id}'/>"><c:out value='${workoutreport.trainee.username}' /></a></td>
+                        </c:otherwise>
+                    </c:choose>
                     <td class="report_date"><fmt:formatDate value='${workoutreport.report_date }' pattern='yyyy-MM-dd'/></td>
                     <td class="report_body_part">${workoutreport.body_part}</td>
                     <td class="report_action"><a href="<c:url value='/workoutreports/show?id=${workoutreport.id }' />">詳細を見る</a></td>

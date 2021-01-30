@@ -32,6 +32,14 @@ import javax.persistence.Table;
     @NamedQuery(
             name = "getMyAllReportsCount",
             query = "SELECT COUNT(w) FROM WorkoutReport AS w WHERE w.trainee = :trainee"
+            ),
+    @NamedQuery(
+            name = "getAllFollowReports",
+            query = "SELECT w FROM WorkoutReport AS w, Follow AS f WHERE w.trainee = f.trainee2 AND f.trainee1 = :trainee1"
+            ),
+    @NamedQuery(
+            name = "getAllFollowReportsCount",
+            query = "SELECT COUNT(w) FROM WorkoutReport AS w, Follow AS f WHERE w.trainee = f.trainee2 AND f.trainee1 = :trainee1"
             )
 })
 

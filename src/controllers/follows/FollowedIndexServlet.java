@@ -51,7 +51,7 @@ public class FollowedIndexServlet extends HttpServlet {
                                       .setMaxResults(15)
                                       .getResultList();
 
-        long followerListCount = em.createNamedQuery("getAllFollowedCount", Long.class)
+        long followerListCount = (long)em.createNamedQuery("getAllFollowedCount", Long.class)
                                    .setParameter("trainee2", login_trainee)
                                    .getSingleResult();
 

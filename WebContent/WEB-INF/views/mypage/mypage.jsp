@@ -14,11 +14,16 @@
                 <tr>
                     <th>投稿</th>
                     <td><c:out value="${myWorkoutReportsCount}"/></td>
+                    <th>フォロー中</th>
+                    <td><a href="<c:url value='/follows/followIndex' />"><c:out value="${myAllFollowCount}" /></a></td>
+                    <th>フォロワー</th>
+                    <td><a href="<c:url value='/follows/followedIndex' />"><c:out value="${myAllFollowerCount }"/></a></td>
                 </tr>
             </tbody>
         </table>
         <br />
 
+        <h3>投稿一覧</h3><br />
         <table id="report_list">
             <tbody>
                 <tr>
@@ -44,7 +49,7 @@
                         <c:out value="${i}" />&nbsp;
                     </c:when>
                     <c:otherwise>
-                        <a href="<c:url value='/?page=${i}' />"><c:out value="${i}" /></a>&nbsp;
+                        <a href="<c:url value='/mypage?page=${i}' />"><c:out value="${i}" /></a>&nbsp;
                     </c:otherwise>
                 </c:choose>
             </c:forEach>
